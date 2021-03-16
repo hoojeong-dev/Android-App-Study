@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.WedView_study">
+
+    <!-- 인터넷 권한 설정 필요 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 웹뷰 url 호출시 오류 발생한다면 usesCleartextTraffic="true" 추가하기 -->
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Magnifing_study">
+        <activity android:name="com.example.WebView_study.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
