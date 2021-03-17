@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // setDefaultSourceToMagnifierOffset -> 돋보기 위젯 위치 설정 함수
         sampleText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
