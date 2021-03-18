@@ -15,8 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    //private int setMagnifierX, setMagnifierY;
+
+    int[] viewPosition = new int[2];
+
     @SuppressLint("ClickableViewAccessibility")
-    @RequiresApi(api = Build.VERSION_CODES.P)
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         CheckBox canShowOutside = findViewById(R.id.canShowOutside);
         TextView sampleText = findViewById(R.id.sampleText);
-        Magnifier magnifier = new Magnifier(sampleText);
+        Magnifier magnifier = new Magnifier.Builder(sampleText)
+                .setInitialZoom(1.2f)
+                .setElevation(20.0f)
+                .setSize(1110,650)
+                .setCornerRadius(5.0f).build();
         Rect outRect = new Rect();
-
-        int[] viewPosition = new int[2];
 
         sampleText.post(new Runnable() {
             @Override
@@ -35,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
                 sampleText.getDrawingRect(outRect);
                 sampleText.getLocationOnScreen(viewPosition);
 
-                outRect.offset(viewPosition[0], viewPosition[1]);
+                //outRect.offset(viewPosition[0], viewPosition[1]);
             }
         });
+
 
         sampleText.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -54,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         magnifier.show(event.getRawX() - viewPosition[0],
+                                event.getRawY() - viewPosition[1],
+                                event.getRawX() - viewPosition[0],
                                 event.getRawY() - viewPosition[1]);
                         break;
                     }
@@ -65,5 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
+
+    /*
+    public Magnifier.Builder setDefaultSourceToMagnifierOffset(@Px int horizontalOffset, @Px int verticalOffset){
+        setMagnifierX = horizontalOffset;
+        setMagnifierY = verticalOffset;
+
+        return this;
+    }
+    */
 }
