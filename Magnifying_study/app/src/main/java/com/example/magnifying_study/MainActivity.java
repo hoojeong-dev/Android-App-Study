@@ -46,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
 
+=======
+        // setDefaultSourceToMagnifierOffset -> 돋보기 위젯 위치 설정 함수
+>>>>>>> f8b41ba8e4d5c1c7addd39c654a0e901f0b55ae0
         sampleText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -85,5 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
         return this;
     }
+<<<<<<< HEAD
     */
 }
+=======
+}
+>>>>>>> f8b41ba8e4d5c1c7addd39c654a0e901f0b55ae0
