@@ -25,6 +25,8 @@ public class ReadNewsActivity extends AppCompatActivity {
     private Button btnbottom, btntop;
     private TextView newstext;
 
+    private String[] keyvalue;
+
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.Q)
 
@@ -34,7 +36,7 @@ public class ReadNewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_readnews);
 
         Intent intent = getIntent();
-        String keyvalue = intent.getStringExtra("key");
+        keyvalue = intent.getExtras().getStringArray("key");
 
         newstext = (TextView) findViewById(R.id.newstext);
         btnbottom = (Button) findViewById(R.id.btnbottom);

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    private String keyvalue;
+    private String[] keyvalue;
     private TextView titleTextView;
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
 
@@ -41,7 +41,6 @@ public class ListViewAdapter extends BaseAdapter {
 
         ListViewItem listViewItem = listViewItemList.get(position);
 
-        keyvalue = listViewItem.getKey();
         titleTextView.setText(listViewItem.getTitle());
 
         LinearLayout clickLayout = (LinearLayout) convertView.findViewById(R.id.clickLayout);
@@ -73,6 +72,11 @@ public class ListViewAdapter extends BaseAdapter {
 
         item.setTitle(title);
 
+        // 여기서 title만 리스트에 추가하고 키값은 변수에 저장
         listViewItemList.add(item);
+    }
+
+    public void setKey(String[] keyArray){
+        keyvalue = keyArray;
     }
 }

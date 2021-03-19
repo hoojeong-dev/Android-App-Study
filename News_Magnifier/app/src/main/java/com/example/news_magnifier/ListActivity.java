@@ -17,18 +17,21 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         Intent intent = getIntent();
-        String[] str = intent.getExtras().getStringArray("title");
+        String[] titleArray = intent.getExtras().getStringArray("title");
+        String[] keyArray = intent.getExtras().getStringArray("key");
 
         adapter = new ListViewAdapter();
 
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
 
-        adapter.addItem(str[0]);
-        adapter.addItem(str[1]);
-        adapter.addItem(str[2]);
-        adapter.addItem(str[3]);
-        adapter.addItem(str[4]);
+        adapter.addItem(titleArray[0]);
+        adapter.addItem(titleArray[1]);
+        adapter.addItem(titleArray[2]);
+        adapter.addItem(titleArray[3]);
+        adapter.addItem(titleArray[4]);
+
+        adapter.setKey(keyArray);
 
         adapter.notifyDataSetChanged();
     }
