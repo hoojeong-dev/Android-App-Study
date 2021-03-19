@@ -25,11 +25,8 @@ public class ListActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
 
-        adapter.addItem(titleArray[0]);
-        adapter.addItem(titleArray[1]);
-        adapter.addItem(titleArray[2]);
-        adapter.addItem(titleArray[3]);
-        adapter.addItem(titleArray[4]);
+        for(int i=0; i<5; i++)
+            adapter.addItem(titleArray[i]);
 
         adapter.setKey(keyArray);
 

@@ -18,14 +18,19 @@ import android.widget.Toast;
 
 public class ReadNewsActivity extends AppCompatActivity {
 
+    private String[] newsContents = new String[1000];
+    private int count=0;
+    private int count1 = 0;
+    //private int count2 = 0;
     int[] viewPosition = new int[2];
-    private String contents;
-    private int count_row = 0, count_col = 0;
 
     private Button btnbottom, btntop;
-    private TextView newstext;
+    private TextView newstext1, newstext2,newstext3, newstext4, newstext5;
 
     private String[] keyvalue;
+    //private String[] newsArray = new String[100];
+
+    setNewsString setnewsstring = new setNewsString();
 
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -35,71 +40,45 @@ public class ReadNewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_readnews);
 
-        Intent intent = getIntent();
-        keyvalue = intent.getExtras().getStringArray("key");
+        //Intent intent = getIntent();
+        //keyvalue = intent.getExtras().getStringArray("key");
 
-        newstext = (TextView) findViewById(R.id.newstext);
+        newstext1 = (TextView) findViewById(R.id.newstext1);
+        newstext2 = (TextView) findViewById(R.id.newstext2);
+        newstext3 = (TextView) findViewById(R.id.newstext3);
+        newstext4 = (TextView) findViewById(R.id.newstext4);
+        newstext5 = (TextView) findViewById(R.id.newstext5);
+
         btnbottom = (Button) findViewById(R.id.btnbottom);
         btntop = (Button) findViewById(R.id.btntop);
 
-        Magnifier magnifier = new Magnifier.Builder(newstext)
-                .setInitialZoom(1.2f)
-                .setElevation(20.0f)
-                .setSize(1110,150)
-                .setCornerRadius(5.0f).build();
-        Rect outRect = new Rect();
+        setNewsString.setContent();
+        newsContents = setNewsString.getContent();
+        count = setNewsString.getCount();
 
-        newstext.post(new Runnable() {
-            @Override
-            public void run() {
-                newstext.getDrawingRect(outRect);
-                newstext.getLocationOnScreen(viewPosition);
+        for(int i=0;i<count;i++)
+            System.out.println(i+" : "+newsContents[i]);
 
-                //outRect.offset(viewPosition[0], viewPosition[1]);
-            }
-        });
+        //newsArray = setnewsstring.getContent();
+        newstext1.setText(newsContents[0]);
+        newstext2.setText(newsContents[1]);
+        newstext3.setText(newsContents[2]);
+        newstext4.setText(newsContents[3]);
+        newstext5.setText(newsContents[4]);
 
-        newstext.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE: {
-/*
-                        if (!outRect.contains((int)event.getRawX(), (int)event.getRawX())) {
-                            magnifier.dismiss();
-                            return false;
-                        }
-*/
-                        magnifier.show(event.getRawX() - viewPosition[0],
-                                event.getRawY() - viewPosition[1],
-                                event.getRawX() - viewPosition[0],
-                                event.getRawY() - viewPosition[1]);
-                        break;
-                    }
-
-                    case MotionEvent.ACTION_UP: {
-                        magnifier.dismiss();
-                    }
-                }
-                return true;
-            }
-        });
-
-
-        contents = getContents();
-        String[] newsArray = contents.split("\\.");
-
-        newstext.setText(newsArray[0]);
 
         btnbottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count_row > 0) {
-                    count_row--;
-                    newstext.setText(newsArray[count_row]);
+                if(count1 > 0) {
+                    count1 = count1 - 5;
+                    newstext1.setText(newsContents[count1+1]);
+                    newstext2.setText(newsContents[count1+2]);
+                    newstext3.setText(newsContents[count1+3]);
+                    newstext4.setText(newsContents[count1+4]);
+                    newstext5.setText(newsContents[count1+5]);
                 }
-                else { //if(count == 0){
+                else if(count1 == 0){ //if(count == 0){
                     Toast.makeText(getApplicationContext(), "처음 글입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -108,10 +87,15 @@ public class ReadNewsActivity extends AppCompatActivity {
         btntop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count_row < newsArray.length - 1) {
-                    count_row++;
-                    newstext.setText(newsArray[count_row]);
+                if(count1 < count-5) {
+                    count1 = count1 + 5;
+                    newstext1.setText(newsContents[count1+1]);
+                    newstext2.setText(newsContents[count1+2]);
+                    newstext3.setText(newsContents[count1+3]);
+                    newstext4.setText(newsContents[count1+4]);
+                    newstext5.setText(newsContents[count1+5]);
                 }
+
                 else {//if (count >= newsArray.length-1){
                     Toast.makeText(getApplicationContext(), "마지막 글입니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -119,8 +103,4 @@ public class ReadNewsActivity extends AppCompatActivity {
         });
     }
 
-    public String getContents(){
-        String Contents = "서울시 선관위가 고 박원순 전 서울시장의 성추행 피해자 A 씨에 대한 고발을 접수, 선거법 위반 여부 검토에 들어갔다고 18일 밝혔다. 선관위 관계자는 이날 통화에서 “A씨가 선거법을 위반했다는 신고가 현재까지 5건가량 있었고 고발 주체는 모두 기관·단체가 아닌 개인”이라고 말했다. A 씨는 전날(17일) 서울 중구 명동의 한 호텔에서 열린 ‘서울시장 위력 성폭력 사건 피해자와 함께 말하기’ 기자회견에 나와 “그분(박 전 시장)의 위력은 여전히 강하게 존재한다”며 “(서울시장 보궐선거를 앞둔) 지금 상황에서 본래 선거가 치러지게 된 계기가 많이 묻혔다고 생각한다”고 밝혔다.“피해 사실을 왜곡하고 상처 줬던 정당에서 시장이 선출됐을 때 저의 자리로 돌아갈 수 없을 것이란 두려움이 든다”는 말도 했다.";
-        return Contents;
-    }
 }
