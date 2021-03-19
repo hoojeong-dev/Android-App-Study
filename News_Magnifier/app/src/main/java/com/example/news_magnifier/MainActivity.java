@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnStart;
     private TextView Title;
+    String[] str = {"dkssud", "whssk", "glaemfek", "tndjq", "roshwoa"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, ReadNewsActivity.class);
-                //Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                //Intent intent = new Intent(MainActivity.this, ReadNewsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                intent.putExtra("title", str);
                 startActivity(intent);
             }
         });

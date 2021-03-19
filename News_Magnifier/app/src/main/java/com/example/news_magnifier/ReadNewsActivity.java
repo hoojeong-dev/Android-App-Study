@@ -90,8 +90,6 @@ public class ReadNewsActivity extends AppCompatActivity {
 
         newstext.setText(newsArray[0]);
 
-        newstext.setText(newsArray[0]);
-
         btnbottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
