@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="안녕하세요 만나서 반갑습니다 저는 김후정 입니다"
+        android:textIsSelectable="true"
+        android:textSelectHandleRight="@color/black"
+        android:textSelectHandleLeft="@color/black" />
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"

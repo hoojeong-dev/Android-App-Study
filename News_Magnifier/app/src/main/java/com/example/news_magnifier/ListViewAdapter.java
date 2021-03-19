@@ -46,9 +46,9 @@ public class ListViewAdapter extends BaseAdapter {
         LinearLayout clickLayout = (LinearLayout) convertView.findViewById(R.id.clickLayout);
         clickLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //Toast.makeText(v.getContext(), "hi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "key value : "+keyvalue[pos], Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), ReadNewsActivity.class);
-                intent.putExtra("key", keyvalue);
+                intent.putExtra("key", keyvalue[pos]);
                 v.getContext().startActivity(intent);
             }
         });
